@@ -14,7 +14,153 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      book_requests: {
+        Row: {
+          book_id: string
+          created_at: string
+          donor_id: string
+          id: string
+          message: string | null
+          receiver_id: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          book_id: string
+          created_at?: string
+          donor_id: string
+          id?: string
+          message?: string | null
+          receiver_id: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          book_id?: string
+          created_at?: string
+          donor_id?: string
+          id?: string
+          message?: string | null
+          receiver_id?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "book_requests_book_id_fkey"
+            columns: ["book_id"]
+            isOneToOne: false
+            referencedRelation: "books"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "book_requests_donor_id_fkey"
+            columns: ["donor_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "book_requests_receiver_id_fkey"
+            columns: ["receiver_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      books: {
+        Row: {
+          author: string
+          book_id: string | null
+          cover_image_url: string | null
+          created_at: string
+          description: string | null
+          donor_id: string
+          edition: string | null
+          id: string
+          is_available: boolean
+          publisher: string | null
+          subject_genre: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          author: string
+          book_id?: string | null
+          cover_image_url?: string | null
+          created_at?: string
+          description?: string | null
+          donor_id: string
+          edition?: string | null
+          id?: string
+          is_available?: boolean
+          publisher?: string | null
+          subject_genre?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          author?: string
+          book_id?: string | null
+          cover_image_url?: string | null
+          created_at?: string
+          description?: string | null
+          donor_id?: string
+          edition?: string | null
+          id?: string
+          is_available?: boolean
+          publisher?: string | null
+          subject_genre?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "books_donor_id_fkey"
+            columns: ["donor_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          address: string | null
+          created_at: string
+          email: string
+          full_name: string | null
+          id: string
+          phone: string | null
+          updated_at: string
+          user_id: string
+          user_type: string
+        }
+        Insert: {
+          address?: string | null
+          created_at?: string
+          email: string
+          full_name?: string | null
+          id?: string
+          phone?: string | null
+          updated_at?: string
+          user_id: string
+          user_type: string
+        }
+        Update: {
+          address?: string | null
+          created_at?: string
+          email?: string
+          full_name?: string | null
+          id?: string
+          phone?: string | null
+          updated_at?: string
+          user_id?: string
+          user_type?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
